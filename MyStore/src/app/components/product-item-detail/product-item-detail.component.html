@@ -1,0 +1,32 @@
+<div class="container detail-container">
+  <div class="detail-item row">
+    <div class="img col">
+      <img src="{{ product.url }}" alt="Image of {{ product.name }}" />
+    </div>
+    <div class="col detail-container detail-item">
+      <div class="row">
+        <h1>{{ product.name }}</h1>
+        <p>Price: ${{ product.price }}</p>
+        <p>{{ product.description }}</p>
+        <div class="d-flex">
+          <select
+            name="amount"
+            class="form-select select-input"
+            [(ngModel)]="amount"
+          >
+            <option *ngFor="let i of options" value="{{ i }}">
+              {{ i }}
+            </option>
+          </select>
+        </div>
+        <button
+          class="btn btn-primary cart-btn"
+          (click)="cartButtonClickHandler(product)"
+        >
+          Add to cart
+        </button>
+        <a routerLink="/" class="back-link">back to product list</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div *ngIf="cartProducts.length; else emptyCartMessage" class="cart">
+  <div class="cart__item">
+    <div *ngFor="let product of cartProducts" class="cart-item">
+      <img class="" src="{{ product.url }}" />
+      <div class="cart-panel">
+        <div>
+          <h4>{{ product.name }}</h4>
+        </div>
+        <div>$ {{ product.price }}</div>
+        <div class="number-input-wrapper">
+          Amount:
+          <input
+            type="number"
+            class="number-input"
+            value="{{ product.amount }}"
+            (change)="detectAmountChanges($event, product)"
+          />
+        </div>
+        <div>
+          <button (click)="removeFromCart(product)" class="btn btn-danger">
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="cart-item">
+      <b>Total Price: ${{ total.toFixed(2) }}</b>
+    </div>
+  </div>
+  <div class="cart-item">
+    <form #form="ngForm" class="form-wrapper" (ngSubmit)="submitCheckout()">
+      <p>Full Name</p>
+      <input
+        type="text"
+        placeholder="(Minimum of 3 characters)"
+        class="form-margin"
+        required
+        minlength="3"
+        [(ngModel)]="fullName"
+        name="fullName"
+      />
+      <p>Address</p>
+      <input
+        type="text"
+        placeholder="(Minimum of 6 characters)"
+        class="form-margin"
+        required
+        minlength="6"
+        [(ngModel)]="address"
+        name="address"
+      />
+      <p>Credit card number</p>
+      <input
+        type="text"
+        placeholder="(16-digit number)"
+        class="form-margin"
+        required
+        minlength="16"
+        maxlength="16"
+        [(ngModel)]="creditCardNumber"
+        name="credit"
+      />
+      <p>We will never share your payment detials with anyone.</p>
+      <input
+        type="submit"
+        [disabled]="form.invalid"
+        value="Submit"
+        class="btn btn-primary"
+      />
+    </form>
+  </div>
+</div>
+
+<ng-template #emptyCartMessage>
+  <div class="empty-cart-message">
+    You don't have products in your cart. Please add some products
+    <a routerLink="/" style="text-decoration: none">&nbsp; here</a>.
+  </div>
+</ng-template>

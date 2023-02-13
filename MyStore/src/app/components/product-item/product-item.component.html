@@ -1,0 +1,34 @@
+<div class="card card-hover shadow-lg p-3 mb-5 bg-white">
+  <a
+    routerLink="product"
+    [queryParams]="{ id: product.id }"
+    routerLinkActive="active"
+  >
+    <img
+      src="{{ product.url }}"
+      class="card-img-top"
+      alt="Image of {{ product.name }} "
+      style="height: 300px"
+    />
+  </a>
+  <div class="card-body text-center">
+    <h5 class="card-title">{{ product.name }}</h5>
+    <p class="card-text">${{ product.price }}</p>
+    <div class="d-flex justify-content-center">
+      <form>
+        <select
+          name="amount"
+          class="form-select select-input"
+          [(ngModel)]="amount"
+        >
+          <option *ngFor="let i of options" value="{{ i }}">
+            {{ i }}
+          </option>
+        </select>
+      </form>
+    </div>
+    <button class="btn btn-primary" (click)="cartButtonClickHandler(product)">
+      Add to cart
+    </button>
+  </div>
+</div>
