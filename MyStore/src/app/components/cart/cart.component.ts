@@ -14,6 +14,7 @@ export class CartComponent implements OnInit {
   fullName: string = '';
   creditCardNumber: string = '';
   address: string = '';
+  cardPattern = '[0-9]*';
   // Inject the CartService, and Router depenecies
   constructor(private cartService: CartService, private router: Router) {}
 
@@ -65,6 +66,10 @@ export class CartComponent implements OnInit {
     this.calculateTotalPrice();
   }
 
+  // A method for listening name change values  througn ngModelChange event binding syntax
+  setName(name: string) {
+    this.fullName = name;
+  }
   // A method to listen for submit button in the form.
   submitCheckout() {
     // Remove all products from the cart after the checkout has been submitted.

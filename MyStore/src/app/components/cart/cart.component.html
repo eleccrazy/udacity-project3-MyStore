@@ -38,7 +38,18 @@
         minlength="3"
         [(ngModel)]="fullName"
         name="fullName"
+        #name="ngModel"
       />
+      <div
+        *ngIf="name.invalid && (name.dirty || name.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="name.errors?.['required']">Name is required.</div>
+        <div *ngIf="name.errors?.['minlength']">
+          Name must be at least 3 characters long.
+        </div>
+      </div>
+
       <p>Address</p>
       <input
         type="text"
@@ -48,7 +59,17 @@
         minlength="6"
         [(ngModel)]="address"
         name="address"
+        #addr="ngModel"
       />
+      <div
+        *ngIf="addr.invalid && (addr.dirty || addr.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="addr.errors?.['required']">Address is required.</div>
+        <div *ngIf="addr.errors?.['minlength']">
+          Address must be at least 6 characters long.
+        </div>
+      </div>
       <p>Credit card number</p>
       <input
         type="text"
@@ -58,8 +79,22 @@
         minlength="16"
         maxlength="16"
         [(ngModel)]="creditCardNumber"
+        [pattern]="cardPattern"
         name="credit"
+        #card="ngModel"
       />
+      <div
+        *ngIf="card.invalid && (card.dirty || card.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="card.errors?.['required']">
+          Cardit card number is required.
+        </div>
+        <div *ngIf="card.errors?.['pattern']">Not a number</div>
+        <div *ngIf="!card.errors?.['pattern'] && card.errors?.['minlength']">
+          Credit card number must be 16 characters long.
+        </div>
+      </div>
       <p>We will never share your payment detials with anyone.</p>
       <input
         type="submit"

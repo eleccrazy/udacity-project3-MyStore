@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CartService } from 'src/app/services/cart.service';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/models/product';
 
 @Component({
@@ -10,11 +9,16 @@ import { Product } from 'src/models/product';
 export class ProductItemComponent implements OnInit {
   // product: A variable to get the product info from the parent component.
   @Input() product: Product;
+  // cartEmitter: A variable that is used to emit the event to the partent
+  // component. Emittes an array of Product and number.
+  @Output() productEmitter: EventEmitter<[Product, number]> =
+    new EventEmitter();
+  @Output() amountEmitter: EventEmitter<number> = new EventEmitter();
   amount: number = 1;
   // fixed options for select input.
   options: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   // Inject the cartService dependency for adding new product to the cart.
-  constructor(private cartService: CartService) {
+  constructor() {
     this.product = {
       id: 0,
       name: '',
@@ -24,8 +28,9 @@ export class ProductItemComponent implements OnInit {
     };
   }
   ngOnInit(): void {}
-  // A method responsible for adding a product to the cart.
-  cartButtonClickHandler(product: Product) {
-    this.cartService.addProductToCart(product, this.amount);
+  // A method responsible for emitting the product info to the parent component.
+  cartButtonClickHandler(product: Product): void {
+    // Emmit the selected amount and the product info to the parent component.
+    this.productEmitter.emit([product, this.amount]);
   }
 }
