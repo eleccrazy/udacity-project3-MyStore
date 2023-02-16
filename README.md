@@ -11,7 +11,7 @@ The application includes a(n):
 ## Project Structure
 #### A total of 6 components are included in this application
 * **ProductList** - A component responsible for rendering all products.
-* **ProductListItem** - A child component to the ProductList component. This component is responsible for rendering individual items to the page.
+* **ProductItem** - A child component to the ProductList component. This component is responsible for rendering individual items to the page.
 * **ProductDescription** - A component which responsible for rendering the details of each product.
 * **Cart** - A component which is responsible for handling checkout information.
 * **Confirmation** - A component which is responsible for showing a message to the user that loads after a successful checkout.
