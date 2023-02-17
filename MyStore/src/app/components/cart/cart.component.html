@@ -37,6 +37,7 @@
         required
         minlength="3"
         [(ngModel)]="fullName"
+        (ngModelChange)="setName(fullName)"
         name="fullName"
         #name="ngModel"
       />
